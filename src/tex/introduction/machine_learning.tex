@@ -31,114 +31,73 @@
     % \includegraphics[scale=0.2]{figures/knn-regression.png}
 \end{frame}
 
-\begin{frame}{Felügyelt tanulás}
+\begin{frame}{Felügyelt tanulás - Várjunk-e az asztalra?}
     \centering
     \begin{tikzpicture}
-        [
-        scale=0.8,
-         % Styles
-         no/.style={rectangle,draw=red!50,fill=red!20,thick},
+        [no/.style={rectangle,draw=red!50,fill=red!20,thick},
          yes/.style={rectangle,draw=blue!50,fill=blue!20,thick},
-         q/.style={rectangle,draw}
-        ] 
-        %  level distance=4mm,
-        %  level 1/.style={sibling distance=20mm},
-        %  level 2/.style={sibling distance=30mm},
-        %  level 3/.style={sibling distance=35mm},
-        %  level 4/.style={sibling distance=40mm},
-        %  level 5/.style={sibling distance=45mm}
+         question/.style={rectangle,draw},
+         every node/.style={node distance=7mm},
+         dec/.style={midway,fill=white}]
         
-
-        \node[q] (root) {Barátok?}
-            [sibling distance=30mm]
-            child { node[no] {Nem} 
-                edge from parent
-                    node[left] {Nincs}
-            }
-            child { node[yes] {Igen} 
-                edge from parent
-                    node[left] {Néhány}
-            }
-            child { node[q] {Várakozás?}
-                % edge from parent node[right] {Sok}
-                [sibling distance=30mm]
-                child { node[no] {Nem} 
-                    edge from parent
-                        node[left] {>60}
-                }
-                child { node[q] {Alternatíva?}
-                    [sibling distance=30mm]
-                    child { node[q] {Foglalás?} 
-                        [sibling distance=15mm]
-                        child { node[q] {Bár?}
-                            child { node[no] {Nem} }
-                            child { node[yes] {Igen} } 
-                            }
-                        child { node[yes] {Igen} } 
-                        }
-                    child { node[q] {Péntek?}
-                        [sibling distance=15mm]
-                        child { node[no] {Nem} }
-                        child { node[yes] {Igen} } 
-                        } 
-                    }
-                child[missing] { node[y] {Igen} }
-                child { node[q] {Éhes?}
-                    [sibling distance=25mm]
-                    child { node[yes] {Igen} }
-                    child { node[q] {Alternatíva?}
-                        [sibling distance=15mm]
-                        child { node[yes] {Igen} }
-                        child { node[q] {Esik?} 
-                        [sibling distance=15mm]
-                            child { node[no] {Nem} }
-                            child { node[yes] {Igen} }
-                            }
-                        }
-                    }
-                child { node[yes] {Igen} } };
-    \end{tikzpicture}
-    % \begin{tikzpicture}
-    %     [scale=0.1,
-    %      % Styles
-    %      no/.style={rectangle,draw=red!50,fill=red!20,thick},
-    %      yes/.style={rectangle,draw=blue!50,fill=blue!20,thick},
-    %      question/.style={rectangle,draw}]
-
-    %     \node[no] (n1) {Nem};
-    %     \node[yes] (y1) [right=of n1] {Igen};
-    %     \node[question] (q1) [above=of y1] {Barátok?}
-    %         edge [->] (n1)
-    %         edge [->] (y1);
+        \node[no] (n1) {Nem};
+        \node[yes] (y1) [right=of n1] {Igen};
+        \node[question] (q1) [above=of y1] {Barátok?}
+            edge [->] node[auto,swap] {\scriptsize Nincs}   (n1)
+            edge [->] node[dec]      {\scriptsize Néhány}  (y1);
         
-    %     \node[no] (n2) [below=of y1] {Nem};
-    %     \node[question] (q2) [right=of y1] {Várakozási idő?}
-    %         edge [<-] (q1)
-    %         edge [->] (n2);
-    %     \node[question] (q3) [right=of n2] {Alternatív?}
-    %         edge [<-] (q2);
-    %     \node[question] (q4) [right=of q3] {Éhes?}
-    %         edge [<-] (q2);
-    %     \node[yes] (y2) [right=of q4] {Igen}
-    %         edge [<-] (q2);
+        % Várakozási idő és annak gyerekei
+        \node[no]       (n2) [below=of y1] {Nem};
+        \node[question] (q2) [right=of y1] {Várakozási idő?}
+            edge [<-] node[dec] {\scriptsize Sok} (q1)
+            edge [->] node[dec] {\scriptsize >60} (n2);
             
-    %     \node[question] (q5) [below left=of q3] {Foglalás?}
-    %         edge [<-] (q3);
-    %     \node[question] (q6) [below right=of q3] {P/Szo?}
-    %         edge [<-] (q3);
+        \node[question] (q3) [right=of n2] {Alternatíva?}
+            edge [<-] node[dec] {\scriptsize 30-60} (q2);
+            
+        \node[question] (q4) [right=of q3] {Éhes?}
+            edge [<-] node[dec] {\scriptsize 10-30} (q2);
         
-    %     \node[question] (q7) [below left=of q5] {Bár?}
-    %         edge [<-] (q5);
-    %     \node[yes] (q8) [right=of q7] {Igen}
-    %         edge [<-] (q5);
-    %     \node[no] (n3) [below left=of q7] {Nem}
-    %         edge [<-] (q7);
-    %     \node[yes] (y4) [below right=of q7] {Igen}
-    %         edge [<-] (q7);
+        \node[yes] (y2) [right=of q4] {Igen}
+            edge [<-] node[dec] {\scriptsize 0-10} (q2);
         
-    % \end{tikzpicture}
+        % Alternatíva és Éhes gyerekei
+        \node[question] (q5) [below=of n2] {Foglalás?}
+            edge [<-] node[dec] {\scriptsize Nincs} (q3);
+        \node[question] (q6) [right=of q5] {P/Szo?}
+            edge [<-] node[dec] {\scriptsize Van} (q3);
+        \node[question] (q7) [below=of y2] {Alternatíva?}
+            edge [<-] node[dec] {\scriptsize Igen} (q4);
+        \node[yes] (y3) [left=of q7] {Igen}
+            edge [<-] node[dec] {\scriptsize Nem} (q4);
+        
+        % Foglalás és P/Szo gyerekei
+        \node[yes] (y4) [below=of q5] {Igen}
+            edge [<-]node[dec] {\scriptsize Van} (q5);
+        \node[question] (q8) [left=of y4] {Bár?}
+            edge [<-] node[dec] {\scriptsize Nincs} (q5);
+        \node[no] (n3) [right=of y4] {Nem}
+            edge [<-] node[dec] {\scriptsize Nem} (q6);
+        \node[yes] (y5) [right=of n3] {Igen}
+            edge [<-] node[dec] {\scriptsize Igen} (q6);
+            
+        % Bár gyerekei
+        \node[no] (n4) [below=of q8] {Nem}
+            edge [<-] node[dec] {\scriptsize Nem} (q8);
+        \node[yes] (y5) [right=of n4] {Igen}
+            edge [<-] node[dec] {\scriptsize Igen} (q8);
+        
+        % Alternatíva gyerekei
+        \node[yes] (y6) [below=of q7] {Igen}
+            edge [<-] node[dec] {\scriptsize Nem} (q7);
+        \node[question] (q9) [right=of y6] {Esik?}
+            edge [<-] node[dec] {\scriptsize Igen} (q7);
+        \node[no] (n5) [below=of y6] {Nem}
+            edge [<-] node[dec] {\scriptsize Nem} (q9);
+        \node[yes] (y8) [right=of n5] {Igen}
+            edge [<-] node[dec] {\scriptsize Igen} (q9);
+    \end{tikzpicture}
 \end{frame}
-
 
 \begin{frame}{Nemfelügyelt tanulás}
     \begin{itemize}
