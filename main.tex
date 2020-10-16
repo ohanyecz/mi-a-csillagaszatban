@@ -1,0 +1,67 @@
+\documentclass{beamer}
+
+\mode<presentation>
+{
+  \usetheme{CambridgeUS}      % or try Darmstadt, Madrid, Warsaw, ...
+  \usecolortheme{beaver} % or try albatross, beaver, crane, ...
+  \usefonttheme{default}  % or try serif, structurebold, ...
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+  \setbeamertemplate{theorems}[numbered]
+  \setbeamertemplate{itemize items}[default]
+  \setbeamertemplate{enumerate items}[default]
+}
+
+\usepackage[magyar]{babel}
+\usepackage{t1enc}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    % filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\setcounter{tocdepth}{1}
+
+\title[MI a csillagászatban]{Hogyan változtatja meg a mesterséges intelligencia a csillagászatot?}
+\subtitle{És úgy általában a tudományt...}
+\author{Hanyecz Ottó} 
+\date[MTT, \today]
+{
+\begin{columns}
+    \begin{column}{0.9\textwidth}
+        \centering
+        \begin{Large}
+            Polaris Csillagvizsgáló \\
+        \end{Large}
+        \vspace*{0.5cm}
+        Budapest \\
+        \vspace*{0.5cm}
+        2020. október 26.
+    \end{column}
+\end{columns}
+}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{Tartalom}
+    \tableofcontents
+\end{frame}
+
+\input{tex/introduction.tex}
+
+\end{document}
