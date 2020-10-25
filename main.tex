@@ -15,12 +15,12 @@
 \usepackage[magyar]{babel}
 \usepackage{t1enc}
 \usepackage[utf8]{inputenc}
-\usepackage{color}
+\usepackage{xcolor}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{enumerate}
 \usepackage{tikz}
-\usetikzlibrary{positioning}
+\usetikzlibrary{positioning,decorations.pathmorphing}
 
 \usepackage{hyperref}
 \hypersetup{
@@ -29,6 +29,11 @@
     % filecolor=magenta,      
     urlcolor=cyan,
 }
+
+\definecolor{lorange}{HTML}{E1931C}
+\definecolor{dorange}{HTML}{E17A1C}
+\definecolor{lblue}{HTML}{137B8A}
+\definecolor{dblue}{HTML}{1C5493}
 
 \setcounter{tocdepth}{1}
 
@@ -62,6 +67,10 @@
     \tableofcontents
 \end{frame}
 
+
 \input{tex/introduction.tex}
+\section{A gépi tanulás alkalmazásai}
+\input{tex/heliocentric_model}
+\input{tex/ai_physicist}
 
 \end{document}
