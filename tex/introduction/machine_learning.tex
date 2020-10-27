@@ -3,7 +3,7 @@
     \begin{itemize}
         \item Egy algoritmus tanul, ha egy feladat megoldása során olyan változások következnek be a működésében, hogy később ugyanazt a feladatot jobban (eredmény, hatékonyság) képes megoldani, mint korábban
         \item Konkrét utasítások nélkül
-        \item Matematikai modell készítése
+        \item Tanító mintákra van szükség, teszt mintával ellenőrizzük az algoritmust
         \item Felügyelt, felügyelet nélküli, megerősítéses tanulás
     \end{itemize}
 \end{frame}
@@ -11,15 +11,9 @@
 \begin{frame}{Felügyelt tanulás}
     \begin{itemize}
         \item {\bf Tanító minta}: a minták elvárt kimenete ismert
-        % \item {\bf Tanító minta} input-output párokkal: $(x_1, y_1), (x_2, y_2), \dots (x_N, y_N)$
-        %     \begin{itemize}
-        %         \item Minden $y_j$ valami $y = f(x)$ ismeretlen függvényre illeszkedik
-        %         \item Keresünk egy $h$ függvényt, ami a lehető legpontosabban közelíti $f$-t
-        %     \end{itemize}
-        \item {\bf Teszt mintával} ellenőrizzük az illesztés pontosságát
-        % \item Műkedvelőknek: $$\min \frac{1}{N} \sum_{n=1}^{N} \mathcal{L}(f(\Theta, x_n), y_n)$$
+        \item {\bf Teszt mintával} ellenőrizzük a modell általánosító képességét
         \item Két nagy csoport: osztályozás és regresszió (előrejelzés)
-        \item Példák: időjárás-előrejelzés, népességnövekedés, kép és spam felismerése (Feladat: melyik példa melyik csoportba tartozik?)
+        \item Példák: kép és spam felismerése, időjárás-előrejelzés, népességnövekedés
     \end{itemize}
 \end{frame}
 
@@ -94,23 +88,24 @@
 
 \begin{frame}{Nemfelügyelt tanulás}
     \begin{itemize}
-        \item Tanító minta csak input adatokkal - nem ismert, hogy az adat micsoda
-        \item Úgy csoportosítunk, hogy a hasonlók egy csoportba kerüljenek
+        \item Tanító minta bemenő adatokkal, nincs meg az elvárt kimenet
+        \item Kérdés: van-e valami struktúra? 
+        \item Példa: \href{https://news.google.com/}{Google News}
     \end{itemize}
     
-    \centering
-    \begin{tikzpicture}
-        \node<1> (img1) {\includegraphics[scale=0.25]{figures/k-means-1.png}};
-        \node<2> (img2) {\includegraphics[scale=0.25]{figures/k-means-2.png}};
-        \node<3> (img3) {\includegraphics[scale=0.25]{figures/k-means-3.png}};
-        \node<4> (img4) {\includegraphics[scale=0.25]{figures/k-means-4.png}};
-        \node<5> (img5) {\includegraphics[scale=0.25]{figures/k-means-5.png}};
-        \node<6> (img6) {\includegraphics[scale=0.25]{figures/k-means-6.png}};
+    % \centering
+    % \begin{tikzpicture}
+    %     \node<1> (img1) {\includegraphics[scale=0.25]{figures/k-means-1.png}};
+    %     \node<2> (img2) {\includegraphics[scale=0.25]{figures/k-means-2.png}};
+    %     \node<3> (img3) {\includegraphics[scale=0.25]{figures/k-means-3.png}};
+    %     \node<4> (img4) {\includegraphics[scale=0.25]{figures/k-means-4.png}};
+    %     \node<5> (img5) {\includegraphics[scale=0.25]{figures/k-means-5.png}};
+    %     \node<6> (img6) {\includegraphics[scale=0.25]{figures/k-means-6.png}};
         
         % \node<7> (img7) {\includegraphics[scale=0.6]{figures/color1.png}};
         % \node<8> (img8) {\includegraphics[scale=0.6]{figures/color2.png}};
         % \node<9> (img9) {\includegraphics[scale=0.6]{figures/color3.png}};
-    \end{tikzpicture}
+    % \end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Megerősítéses tanulás}
@@ -118,11 +113,12 @@
         % \item Példa: \href{https://deepmind.com/research/case-studies/alphago-the-story-so-far}{AlphaGo} (2015 október, 5-0)
         \item Példa:
         \begin{itemize}
+            \item \href{https://deepmind.com/research/case-studies/alphago-the-story-so-far}{AlphaGo} (2015 október, 5-0)
             \item \href{https://www.youtube.com/watch?v=VMp6pq6_QjI}{AI Learns to Park (Youtube)}
             \item \href{https://www.youtube.com/watch?v=CqYKhbyHFtA}{Two AI Fight for the same parking spot (Youtube)}
         \end{itemize}
         \item Nincs visszajelzés, hogy mi a jó vagy rossz
-        \item Az algoritmus {\it megtanulja}, hogy melyik a jó lépés
+        \item Az algoritmus megtanulja, hogy {\it melyik a jó lépés}
         \item Mi lehet megerősítés? Mikor kap az algoritmus megerősítést?
     \end{itemize}
 \end{frame}
